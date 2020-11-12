@@ -7,6 +7,7 @@
             <p class="text-white text-xl font-bold">SD App</p>
           </div>
           <div class="hidden md:block">
+
             <div class="ml-10 flex items-baseline">
               <a href="#"
                  class="px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">Dashboard
@@ -27,7 +28,16 @@
           </div>
         </div>
         <div class="hidden md:block">
+
           <div class="ml-4 flex items-center md:ml-6">
+            <nuxt-link class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
+                       :class="$i18n.locale === 'en' ? 'bg-gray-900' : ''"
+                       :to="switchLocalePath('en')">EN
+            </nuxt-link>
+            <nuxt-link class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
+                       :class="$i18n.locale === 'ru' ? 'bg-gray-900' : ''"
+                       :to="switchLocalePath('ru')">RU
+            </nuxt-link>
             <button @click="isOpen = !isOpen"
                     class="p-1 border-2 border-transparent text-gray-400 rounded-full hover:text-white focus:outline-none focus:text-white focus:bg-gray-700"
                     aria-label="Notifications">
@@ -39,6 +49,7 @@
             <AccountDropdown/>
           </div>
         </div>
+
         <div class="-mr-2 flex md:hidden">
           <button
             class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:bg-gray-700 focus:text-white">
@@ -109,6 +120,9 @@ import AccountDropdown from '~/components/AccountDropdown.vue'
 export default {
   components: {
     AccountDropdown
+  },
+  computed: {
+
   }
 }
 </script>

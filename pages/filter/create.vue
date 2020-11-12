@@ -13,6 +13,8 @@
 
 <script>
 import VLangTabs from "@/components/controls/VLangTabs";
+import { mapMutations } from 'vuex'
+
 export default {
   name: "create",
   head() {
@@ -30,12 +32,16 @@ export default {
     },
   }),
   methods: {
+    ...mapMutations('app', ['setHeaderTitle']),
     async createFilter() {
       console.log(this.name)
       const data  = await this.$axios.$post('/api/filters', {
         name: this.name
       })
     }
+  },
+  mounted() {
+    this.setHeaderTitle('Create Filter')
   }
 }
 </script>

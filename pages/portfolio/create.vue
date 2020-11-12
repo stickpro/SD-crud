@@ -22,6 +22,8 @@
 
 <script>
 import VLangTabs from "~/components/controls/VLangTabs";
+import { mapMutations } from 'vuex'
+
 
 export default {
   name: "create",
@@ -37,11 +39,15 @@ export default {
     }
   },
   methods: {
+    ...mapMutations('app', ['SET_HEADER_TITLE']),
     async sendTest() {
       const data  = await this.$axios.$post('/api/portfolios', {
         name: this.name
       })
     }
+  },
+  mounted() {
+    this.SET_HEADER_TITLE('Create Portfolios')
   }
 }
 </script>

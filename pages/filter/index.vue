@@ -1,4 +1,8 @@
 <template>
+  <div>
+
+    {{ listFilter }}
+
   <nuxt-link to="filter/create"
              class="group flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
             <span class="relative  flex items-center pr-3">
@@ -10,4 +14,30 @@
             </span>
     Create New Filter
   </nuxt-link>
+  </div>
 </template>
+<script>
+import {mapMutations, mapActions, mapGetters} from "vuex";
+
+export default {
+  computed: {
+    ...mapGetters({
+      listFilter: 'filter/listFilter',
+    }),
+  },
+  head() {
+    return {}
+     title: 'filter list'
+  },
+  methods: {
+    ...mapMutations('app', ['SET_HEADER_TITLE']),
+    ...mapActions({
+      getFilters: 'filter/getFilters'
+    }),
+  },
+  mounted() {
+    this.SET_HEADER_TITLE('Filter List')
+    this.getFilters()
+  }
+}
+</script>

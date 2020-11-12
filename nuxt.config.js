@@ -59,6 +59,7 @@ export default {
 		'@nuxtjs/auth-next',
 		'@nuxtjs/pwa',
 		'@nuxtjs/dotenv',
+    'nuxt-i18n',
 	],
 	/*
 	** Axios module configuration
@@ -88,9 +89,27 @@ export default {
 			home: '/'
 		}
 	},
+  /* i18n */
+  i18n: {
+    parsePages: false,
+    locales: [
+      {
+        code: 'ru',
+        file: 'ru-RU.js'
+      },
+      {
+        code: 'en',
+        file: 'en-EN.js'
+      }
+    ],
+    lazy: true,
+    langDir: 'lang/',
+    defaultLocale: 'ru',
+  },
 
-	router: {
-		middleware: ['auth']
+
+  router: {
+		middleware: ['auth', 'language']
 	},
 
 	/*
@@ -101,5 +120,5 @@ export default {
 		** You can extend webpack config here
 		*/
 		extend (config, ctx) {}
-	}	
+	}
 }

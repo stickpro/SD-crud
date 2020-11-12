@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
       {{ label }}
     </label>
     <nav class="flex flex-col sm:flex-row" >
