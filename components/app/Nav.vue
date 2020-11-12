@@ -13,10 +13,12 @@
                  class="px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">Dashboard
               </a>
               <nuxt-link to="/portfolio"
-                 class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Portfolio
+                 class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">
+                {{ $t("filters.title")}}
               </nuxt-link>
-              <nuxt-link to="/filter"
-                 class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Filter
+              <nuxt-link :to="localePath('filter')"
+                 class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">
+                {{ $t('filters.title')}}
               </nuxt-link>
               <a href="#"
                  class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Calendar
@@ -38,6 +40,11 @@
                        :class="$i18n.locale === 'ru' ? 'bg-gray-900' : ''"
                        :to="switchLocalePath('ru')">RU
             </nuxt-link>
+            <nuxt-link
+              v-for="locale in availableLocales"
+              :key="locale.code"
+              :to="switchLocalePath(locale.code)">{{ locale.name }}</nuxt-link>
+
             <button @click="isOpen = !isOpen"
                     class="p-1 border-2 border-transparent text-gray-400 rounded-full hover:text-white focus:outline-none focus:text-white focus:bg-gray-700"
                     aria-label="Notifications">
@@ -122,7 +129,9 @@ export default {
     AccountDropdown
   },
   computed: {
-
+    availableLocales () {
+      return this.$i18n.locales.filter(i => i.code !== this.$i18n.locale)
+    }
   }
 }
 </script>

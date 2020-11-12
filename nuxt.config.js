@@ -68,6 +68,11 @@ export default {
 	axios: {
 		baseUrl: process.env.API_URL,
 		credentials: true,
+    header: {
+      common: {
+        'X-localization': 'ru'
+      }
+    },
 	},
 
 	auth: {
@@ -95,11 +100,13 @@ export default {
     locales: [
       {
         code: 'ru',
-        file: 'ru-RU.js'
+        file: 'ru-RU.js',
+        name: 'Русский'
       },
       {
         code: 'en',
-        file: 'en-EN.js'
+        file: 'en-EN.js',
+        name: 'English'
       }
     ],
     lazy: true,

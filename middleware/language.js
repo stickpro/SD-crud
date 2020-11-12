@@ -1,3 +1,5 @@
-export default async function({ app: { i18n, $axios } }) {
-  $axios.defaults.headers.common['Accept-Language'] = i18n.locale;
+ export default async function({ app ,  $axios })  {
+   app.i18n.onLanguageSwitched = (oldLocale, newLocale) => {
+     $axios.defaults.headers.common['X-localization'] = newLocale
+   }
 }

@@ -1,5 +1,5 @@
 export default {
-  filter: {
-    title: ''
+  filters: {
+    title: 'Фильтры'
   }
 }
