@@ -1,42 +1,117 @@
 <template>
-  <div>
-
-    {{ listFilter }}
-
-  <nuxt-link to="filter/create"
-             class="group flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+  <div class="px-5 py-10 mx-auto">
+    <!--  todo create table component  -->
+    <div class="flex">
+      <div class=" w-full">
+        <div class="py-2 align-middle inline-block min-w-full ">
+          <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead>
+              <tr>
+                <th v-for="(column, index) in filterColumns"
+                    :key="column.name"
+                    :class="index == filterColumns.length - 1 ? 'text-right' : 'text-left' "
+                    class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                  {{ column.label }}
+                </th>
+              </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-200">
+              <tr v-for="item in listFilters">
+                <td class="px-6 py-4 whitespace-no-wrap">
+                  <div class="ml-4">
+                    <div class="text-sm leading-5 font-medium text-gray-900">
+                      {{ item.name }}
+                    </div>
+                  </div>
+                </td>
+                <td class="px-6 py-4 whitespace-no-wrap">
+                  <div class="text-sm leading-5 text-gray-900">{{ item.created_at.slice(0, 10) }}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
+                  <nuxt-link :to="localePath({name: 'filter-id', params: { id: item.id }})"
+                             class="text-indigo-600 hover:text-indigo-900">
+                    <svg-icon name="create" class="w-5 h-5 inline-block text-red-500" fill="#5A67D8" />
+                    {{ $t('app.edit') }}
+                  </nuxt-link>
+                  <button @click="remove(item)"
+                          class="text-red-500 font-medium leading-5">
+                    <svg-icon name="trash" class="w-5 h-5 inline-block text-red-500" fill="#E53E3E" />
+                    Удалить
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nuxt-link :to="localePath({ name: 'filter-create', params: { slug: 'create' }})"
+               class="group flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
             <span class="relative  flex items-center pr-3">
-                <svg viewBox="0 0 20 20" enable-background="new 0 0 20 20" class="w-6 h-6 inline-block">
-                  <path fill="#FFFFFF" d="M16,10c0,0.553-0.048,1-0.601,1H11v4.399C11,15.951,10.553,16,10,16c-0.553,0-1-0.049-1-0.601V11H4.601
-                                          C4.049,11,4,10.553,4,10c0-0.553,0.049-1,0.601-1H9V4.601C9,4.048,9.447,4,10,4c0.553,0,1,0.048,1,0.601V9h4.399
-                                          C15.952,9,16,9.447,16,10z"/>
-                </svg>
+                  <svg-icon name="add" class="w-5 h-5 inline-block text-white" fill="#fff" viewBox="0 0 20 20" />
             </span>
-    Create New Filter
-  </nuxt-link>
+      Create New Filter
+    </nuxt-link>
   </div>
 </template>
 <script>
 import {mapMutations, mapActions, mapGetters} from "vuex";
+import VTable from "@/components/controls/VTable";
 
 export default {
+  head() {
+    return {
+      title: this.$t('filters.listTitle')
+    }
+  },
+  components: {
+    VTable,
+  },
+  data() {
+    return {
+      filterColumns: [
+        {
+          label: this.$t('app.name'),
+          field: 'name',
+        },
+        {
+          label: this.$t('app.date'),
+          field: 'createdAt',
+          type: 'date',
+        },
+        {
+          label: this.$t('app.action'),
+          field: 'score',
+          type: 'action',
+        },
+      ],
+    }
+  },
   computed: {
     ...mapGetters({
-      listFilter: 'filter/listFilter',
+      listFilters: 'filter/listFilters',
     }),
-  },
-  head() {
-    return {}
-     title: 'filter list'
   },
   methods: {
     ...mapMutations('app', ['SET_HEADER_TITLE']),
     ...mapActions({
-      getFilters: 'filter/getFilters'
+      getFilters: 'filter/getFilters',
+      deleteFilter: 'filter/deleteFilter'
     }),
+    remove(item) {
+      this.$toast.show({
+        title: this.$t('app.delete') + '?',
+        message: `${this.$t('app.deleteDes')} ${item.name}`,
+        primary: { label: this.$t('app.delete'), action: () => this.deleteFilter(item.id) },
+        secondary: { label: this.$t('app.cancel'), action: () => null },
+        timeout: false,
+      })
+    }
   },
   mounted() {
-    this.SET_HEADER_TITLE('Filter List')
+    this.SET_HEADER_TITLE(this.$t('filters.listTitle'))
     this.getFilters()
   }
 }

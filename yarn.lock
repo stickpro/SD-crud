@@ -1243,6 +1243,18 @@
     jimp-compact "^0.8.0"
     workbox-cdn "^4.3.1"
 
+"@nuxtjs/svg-sprite@^0.5.1":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/svg-sprite/-/svg-sprite-0.5.1.tgz#0d72bb9d94ce21a40f6456e49910e7ec8b2f68d0"
+  integrity sha512-o5UE+ud8CjEmDCKkqOXKYE9gF0w2B9C3SsFObCfUk3O2NmfyJQrGrdyAa4M6MsuPr9jnRAXKdNGijPY411KLDg==
+  dependencies:
+    chalk "^4.1.0"
+    chokidar "^3.4.3"
+    consola "^2.15.0"
+    fs-extra "^9.0.1"
+    svgo "^1.3.2"
+    vue-functional-data-merge "^3.1.0"
+
 "@nuxtjs/tailwindcss@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@nuxtjs/tailwindcss/-/tailwindcss-2.0.0.tgz#0cf0893f7f1156367507c0f6683d90b62c0e5714"
@@ -2309,7 +2321,7 @@ chalk@^3.0.0:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
-chalk@^4.0.0:
+chalk@^4.0.0, chalk@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.0.tgz#4e14870a618d9e2edd97dd8345fd9d9dc315646a"
   integrity sha512-qwx12AxXe2Q5xQ43Ac//I6v5aXTipYrSESdOgzrN+9XjgEpyjpKuvSGaN4qE93f7TQTlerQQ8S+EQ0EyDoVL1A==
@@ -2353,6 +2365,21 @@ chokidar@^3.3.1, chokidar@^3.4.0:
     is-glob "~4.0.1"
     normalize-path "~3.0.0"
     readdirp "~3.4.0"
+  optionalDependencies:
+    fsevents "~2.1.2"
+
+chokidar@^3.4.3:
+  version "3.4.3"
+  resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.4.3.tgz#c1df38231448e45ca4ac588e6c79573ba6a57d5b"
+  integrity sha512-DtM3g7juCXQxFVSNPNByEC2+NImtBuxQQvWlHunpJIS5Ocr0lG306cC7FCi7cEA0fzmybPUIl4txBIobk1gGOQ==
+  dependencies:
+    anymatch "~3.1.1"
+    braces "~3.0.2"
+    glob-parent "~5.1.0"
+    is-binary-path "~2.1.0"
+    is-glob "~4.0.1"
+    normalize-path "~3.0.0"
+    readdirp "~3.5.0"
   optionalDependencies:
     fsevents "~2.1.2"
 
@@ -2574,6 +2601,11 @@ consola@^2.10.0, consola@^2.10.1, consola@^2.11.3, consola@^2.6.0, consola@^2.9.
   version "2.13.0"
   resolved "https://registry.yarnpkg.com/consola/-/consola-2.13.0.tgz#5a4dc75e1b1fddbd8b10728e7790a2e54efeeeb7"
   integrity sha512-Jw+8qpL0yrpfqH9m90fWoDRQyn8TYU6Aegpl4UofoP81VYvQLoOWMpFw2vQ3U/cyLRRzTc/CyNC6YYVzZFU8Eg==
+
+consola@^2.15.0:
+  version "2.15.0"
+  resolved "https://registry.yarnpkg.com/consola/-/consola-2.15.0.tgz#40fc4eefa4d2f8ef2e2806147f056ea207fcc0e9"
+  integrity sha512-vlcSGgdYS26mPf7qNi+dCisbhiyDnrN1zaRbw3CSuc2wGOMEGGPsp46PdRG5gqXwgtJfjxDkxRNAgRPr1B77vQ==
 
 console-browserify@^1.1.0:
   version "1.2.0"
@@ -3764,7 +3796,7 @@ fs-extra@^8.0.0, fs-extra@^8.1.0:
     jsonfile "^4.0.0"
     universalify "^0.1.0"
 
-fs-extra@^9.0.0:
+fs-extra@^9.0.0, fs-extra@^9.0.1:
   version "9.0.1"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-9.0.1.tgz#910da0062437ba4c39fedd863f1675ccfefcb9fc"
   integrity sha512-h2iAoN838FqAFJY2/qVpzFXy+EBxfVE220PalAqQLDVsFOHLJrZvut5puAbCdNv6WJk+B8ihI+k0c7JK5erwqQ==
@@ -5596,6 +5628,16 @@ nuxt-i18n@^6.15.4:
     lodash.clonedeep "^4.5.0"
     vue-i18n "^8.18.1"
 
+nuxt-tailvue@^1.0.46:
+  version "1.0.46"
+  resolved "https://registry.yarnpkg.com/nuxt-tailvue/-/nuxt-tailvue-1.0.46.tgz#78d0ea16a65a9d4e231b14676b37906d650a18e9"
+  integrity sha512-Z691TAGH7pzKpuXdxs2RFfv0gjASDPbeGl8B65Fck2qAxvNkJYxXXs0KhgHOPrJmLX7G0zqvokxK7PdqM/Dh6g==
+  dependencies:
+    tv-button "^1.0.7"
+    tv-icon "^1.0.6"
+    tv-modal "^1.0.3"
+    tv-toast "^1.2.4"
+
 nuxt@^2.0.0:
   version "2.12.2"
   resolved "https://registry.yarnpkg.com/nuxt/-/nuxt-2.12.2.tgz#959baa919bfef4adcd9e88f84bc948a49a03edd8"
@@ -6981,6 +7023,13 @@ readdirp@~3.4.0:
   dependencies:
     picomatch "^2.2.1"
 
+readdirp@~3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/readdirp/-/readdirp-3.5.0.tgz#9ba74c019b15d365278d2e91bb8c48d7b4d42c9e"
+  integrity sha512-cMhu7c/8rdhkHXWsY+osBhfSy0JikwpHK/5+imo+LpeasTF8ouErHrlYkwT0++njiyuDvc7OFY5T3ukvZ8qmFQ==
+  dependencies:
+    picomatch "^2.2.1"
+
 redent@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/redent/-/redent-1.0.0.tgz#cf916ab1fd5f1f16dfb20822dd6ec7f730c2afde"
@@ -7862,7 +7911,7 @@ svg-tags@^1.0.0:
   resolved "https://registry.yarnpkg.com/svg-tags/-/svg-tags-1.0.0.tgz#58f71cee3bd519b59d4b2a843b6c7de64ac04764"
   integrity sha1-WPcc7jvVGbWdSyqEO2x95krAR2Q=
 
-svgo@^1.0.0:
+svgo@^1.0.0, svgo@^1.3.2:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/svgo/-/svgo-1.3.2.tgz#b6dc511c063346c9e415b81e43401145b96d4167"
   integrity sha512-yhy/sQYxR5BkC98CY7o31VGsg014AKLEPxdfhora76l36hD9Rdy5NZA/Ocn6yayNPgSamYdtX2rFJdcv07AYVw==
@@ -8096,6 +8145,31 @@ tunnel-agent@^0.6.0:
   integrity sha1-J6XeoGs2sEoKmWZ3SykIaPD8QP0=
   dependencies:
     safe-buffer "^5.0.1"
+
+tv-button@^1.0.7:
+  version "1.0.17"
+  resolved "https://registry.yarnpkg.com/tv-button/-/tv-button-1.0.17.tgz#b272868ec548f8f16eca1fb0a47410c0b42ffac0"
+  integrity sha512-kw0KdPGW/E9gzDIhAtUfUjihKkZuMIU5qMs/Vxc9s+Jsl+wkHumQsnzYKRciN8mKRas73PZnUajs6NOfxrx7rg==
+
+tv-icon@^1.0.1, tv-icon@^1.0.6:
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/tv-icon/-/tv-icon-1.0.13.tgz#1b558c6a5a7319c33401a2beb4ccb8bf38b5614c"
+  integrity sha512-I0DFK0OLZrTmKN51DJJrinUl4rHnK9Jy/HF3aNDpcPnVMRsdnNzBfuoRqRQCviEi5ZWxVFywMCK9UKiVZg4qgg==
+
+tv-modal@^1.0.3:
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/tv-modal/-/tv-modal-1.0.12.tgz#83055be7815a7dffe6a64d9ba039cfcd0416a7a7"
+  integrity sha512-e1U5hFcB3oebBSq6Y4nKoo6Dsk7SWeSkSIu51j+TeQT3b6ZjyODWBTxjjpZPCkujOR33bpsxGwgCXQdsnYPoyw==
+  dependencies:
+    tv-button "^1.0.7"
+    tv-icon "^1.0.1"
+
+tv-toast@^1.2.4:
+  version "1.2.17"
+  resolved "https://registry.yarnpkg.com/tv-toast/-/tv-toast-1.2.17.tgz#ad6b1bb7a5025dcf503df7b0c2d82617eac66c54"
+  integrity sha512-0wj+7VwYXOeXMk+qZDrnw/yvw3ePlklfjIJB3MK8vwnJFs+6yd5SwcMxOCw5K7+YmVwUIVZTQo/Zt7mKEK+YqA==
+  dependencies:
+    tv-icon "^1.0.1"
 
 tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"
@@ -8379,6 +8453,11 @@ vue-client-only@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/vue-client-only/-/vue-client-only-2.0.0.tgz#ddad8d675ee02c761a14229f0e440e219de1da1c"
   integrity sha512-arhk1wtWAfLsJyxGMoEYhoBowM87/i6HLSG2LH/03Yog6i2d9JEN1peMP0Ceis+/n9DxdenGYZZTxbPPJyHciA==
+
+vue-functional-data-merge@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/vue-functional-data-merge/-/vue-functional-data-merge-3.1.0.tgz#08a7797583b7f35680587f8a1d51d729aa1dc657"
+  integrity sha512-leT4kdJVQyeZNY1kmnS1xiUlQ9z1B/kdBFCILIjYYQDqZgLqCLa0UhjSSeRX6c3mUe6U5qYeM8LrEqkHJ1B4LA==
 
 vue-hot-reload-api@^2.3.0:
   version "2.3.4"

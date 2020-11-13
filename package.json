@@ -15,8 +15,10 @@
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/dotenv": "^1.4.0",
     "@nuxtjs/pwa": "^3.0.0-0",
+    "@nuxtjs/svg-sprite": "^0.5.1",
     "nuxt": "^2.0.0",
-    "nuxt-i18n": "^6.15.4"
+    "nuxt-i18n": "^6.15.4",
+    "nuxt-tailvue": "^1.0.46"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^2.0.0",

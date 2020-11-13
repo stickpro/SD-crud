@@ -12,9 +12,9 @@
               <a href="#"
                  class="px-3 py-2 rounded-md text-sm font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-gray-700">Dashboard
               </a>
-              <nuxt-link to="/portfolio"
+              <nuxt-link :to="localePath('portfolio')"
                  class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">
-                {{ $t("filters.title")}}
+                {{ $t("portfolios.title")}}
               </nuxt-link>
               <nuxt-link :to="localePath('filter')"
                  class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">
@@ -30,7 +30,6 @@
           </div>
         </div>
         <div class="hidden md:block">
-
           <div class="ml-4 flex items-center md:ml-6">
             <nuxt-link class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
                        :class="$i18n.locale === 'en' ? 'bg-gray-900' : ''"
@@ -40,10 +39,6 @@
                        :class="$i18n.locale === 'ru' ? 'bg-gray-900' : ''"
                        :to="switchLocalePath('ru')">RU
             </nuxt-link>
-            <nuxt-link
-              v-for="locale in availableLocales"
-              :key="locale.code"
-              :to="switchLocalePath(locale.code)">{{ locale.name }}</nuxt-link>
 
             <button @click="isOpen = !isOpen"
                     class="p-1 border-2 border-transparent text-gray-400 rounded-full hover:text-white focus:outline-none focus:text-white focus:bg-gray-700"

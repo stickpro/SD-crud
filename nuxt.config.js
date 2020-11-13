@@ -57,10 +57,12 @@ export default {
 	modules: [
 		'@nuxtjs/axios',
 		'@nuxtjs/auth-next',
-		'@nuxtjs/pwa',
+    '@nuxtjs/svg-sprite',
+    ['@nuxtjs/pwa', {icon: false }],
 		'@nuxtjs/dotenv',
     'nuxt-i18n',
-	],
+    ['nuxt-tailvue', {toast: true}],
+  ],
 	/*
 	** Axios module configuration
 	** See https://axios.nuxtjs.org/options
