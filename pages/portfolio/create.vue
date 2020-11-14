@@ -1,53 +1,152 @@
 <template>
-  <div class="px-5 py-10 mx-auto">
-    <div class="flex flex-wrap -mx-3 overflow-hidden sm:-mx-1 md:-mx-2">
-      <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/5">
-        <VLangTabs :name.sync="name" label="Name"/>
-      </div>
-      <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/5">
-        <VLangTabs :name.sync="name" label="Name"/>
-      </div>
-      <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/5">
-        <VLangTabs :name.sync="name" label="Name"/>
-      </div>
-      <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/5">
-        <VLangTabs :name.sync="name" label="Name"/>
+  <div class="grid grid-cols-12 mt-5">
+    <div class="intro-y col-span-12 mx-2 lg:col-span-6">
+      <div class="flex flex-wrap  overflow-hidden sm:-mx-1 md:-mx-2">
+        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+          <VLangTabs :name.sync="title" label="Title"/>
+        </div>
+        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+          <VLangTabs :name.sync="slug" label="Slug"/>
+        </div>
+        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+          <VLangTabs :name.sync="seo_title" label="Seo title"/>
+        </div>
+        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/2">
+          <VLangTabs :name.sync="seo_description" label="Seo Description" type="textarea"/>
+        </div>
+        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/2">
+          <VLangTabs :name.sync="seo_keywords" label="Seo Keywords" type="textarea"/>
+        </div>
       </div>
     </div>
-    <button class="flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
-    @click="sendTest">Create</button>
-
+    <div class="intro-y col-span-12 mx-2 lg:col-span-6">
+      <div class="flex flex-wrap -mx-3 sm:-mx-1 md:-mx-2">
+        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-full">
+          <VLangTabs :name.sync="description" label="Description" type="textarea"/>
+        </div>
+        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/2">
+          <label class="flex uppercase tracking-wide text-gray-700 text-xs font-bold align-middle mb-4">
+            external_link
+          </label>
+          <input type="text"
+                 v-model="external_link"
+                 class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5"
+                 placeholder="external_link"/>
+        </div>
+        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/2">
+          <label class="flex uppercase tracking-wide text-gray-700 text-xs font-bold align-middle mb-4">
+            Select Filter
+          </label>
+          <VSelect  :data="listFilters" v-model="filter" v-on:valueSelect="onValueSelect"/>
+        </div>
+      </div>
+    </div>
+    <div class="intro-y col-span-12 mx-2 lg:col-span-12">
+      <div class="mt-6">
+        <label class="block text-sm leading-5 font-medium text-gray-700">
+          Cover photo
+        </label>
+        <div class="mt-2 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+          <div class="text-center">
+            <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+              <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <p class="mt-1 text-sm text-gray-600">
+              <button class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition duration-150 ease-in-out">
+                Upload a file
+              </button>
+              or drag and drop
+            </p>
+            <p class="mt-1 text-xs text-gray-500">
+              PNG, JPG, GIF up to 10MB
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-wrap -mx-3 overflow-hidden sm:-mx-1 md:-mx-2">
+      <div class="fixed right-0 mx-10 my-10 bottom-0">
+        <button
+          class="flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
+          @click="sendTest">Create
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import {mapActions, mapGetters, mapMutations} from 'vuex'
 import VLangTabs from "~/components/controls/VLangTabs";
-import { mapMutations } from 'vuex'
-
+import VSelect from "@/components/controls/VSelect";
 
 export default {
   name: "create",
   components: {
-    VLangTabs
+    VLangTabs,
+    VSelect
   },
   data() {
     return {
-      name: {
-        en: '123',
-        ru: '1223'
+      title: {
+        en: 'title',
+        ru: 'title'
       },
+      slug: {
+        en: 'slug',
+        ru: 'slug'
+      },
+      seo_title: {
+        en: 'seo_title',
+        ru: 'seo_title'
+      },
+      seo_description: {
+        en: 'seo_description',
+        ru: 'seo_description',
+      },
+      seo_keywords: {
+        en: 'seo_keywords',
+        ru: 'seo_keywords',
+      },
+      description: {
+        en: 'description',
+        ru: 'description',
+      },
+      filter: {
+        name: 'Выбирите фильтр'
+      },
+      external_link: '',
     }
+  },
+  computed: {
+    ...mapGetters({
+      listFilters: 'filter/listFilters',
+    }),
   },
   methods: {
     ...mapMutations('app', ['SET_HEADER_TITLE']),
+    ...mapActions({
+      getFilters: 'filter/getFilters',
+    }),
+    onValueSelect(value) {
+      this.filter = value;
+    },
     async sendTest() {
-      const data  = await this.$axios.$post('/api/portfolios', {
-        name: this.name
+      const data = await this.$axios.$post('/api/portfolios', {
+        title: this.title,
+        slug: this.slug,
+        seo_title: this.seo_title,
+        seo_description: this.seo_description,
+        seo_keywords: this.seo_keywords,
+        description: this.description,
+        filter_id: this.filter.id,
+        external_link: this.external_link
       })
     }
   },
   mounted() {
     this.SET_HEADER_TITLE('Create Portfolios')
+    this.getFilters()
   }
 }
 </script>

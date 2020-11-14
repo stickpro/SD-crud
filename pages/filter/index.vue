@@ -31,13 +31,13 @@
                 <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
                   <nuxt-link :to="localePath({name: 'filter-id', params: { id: item.id }})"
                              class="text-indigo-600 hover:text-indigo-900">
-                    <svg-icon name="create" class="w-5 h-5 inline-block text-red-500" fill="#5A67D8" />
+                    <svg-icon name="create" class="w-5 h-5 inline-block text-red-500" fill="#5A67D8"/>
                     {{ $t('app.edit') }}
                   </nuxt-link>
                   <button @click="remove(item)"
                           class="text-red-500 font-medium leading-5">
-                    <svg-icon name="trash" class="w-5 h-5 inline-block text-red-500" fill="#E53E3E" />
-                    Удалить
+                    <svg-icon name="trash" class="w-5 h-5 inline-block text-red-500" fill="#E53E3E"/>
+                    {{ $t('app.delete') }}
                   </button>
                 </td>
               </tr>
@@ -47,13 +47,17 @@
         </div>
       </div>
     </div>
-    <nuxt-link :to="localePath({ name: 'filter-create', params: { slug: 'create' }})"
-               class="group flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+    <div class="flex flex-wrap -mx-3 overflow-hidden sm:-mx-1 md:-mx-2">
+      <div class="fixed right-0 mx-10 my-10 bottom-0">
+        <nuxt-link :to="localePath({ name: 'filter-create', params: { slug: 'create' }})"
+                   class="group flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
             <span class="relative  flex items-center pr-3">
-                  <svg-icon name="add" class="w-5 h-5 inline-block text-white" fill="#fff" viewBox="0 0 20 20" />
+                  <svg-icon name="add" class="w-5 h-5 inline-block text-white" fill="#fff" viewBox="0 0 20 20"/>
             </span>
-      Create New Filter
-    </nuxt-link>
+          Create New Filter
+        </nuxt-link>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -104,8 +108,8 @@ export default {
       this.$toast.show({
         title: this.$t('app.delete') + '?',
         message: `${this.$t('app.deleteDes')} ${item.name}`,
-        primary: { label: this.$t('app.delete'), action: () => this.deleteFilter(item.id) },
-        secondary: { label: this.$t('app.cancel'), action: () => null },
+        primary: {label: this.$t('app.delete'), action: () => this.deleteFilter(item.id)},
+        secondary: {label: this.$t('app.cancel'), action: () => null},
         timeout: false,
       })
     }

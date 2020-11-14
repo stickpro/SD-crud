@@ -18,7 +18,9 @@
     "@nuxtjs/svg-sprite": "^0.5.1",
     "nuxt": "^2.0.0",
     "nuxt-i18n": "^6.15.4",
-    "nuxt-tailvue": "^1.0.46"
+    "nuxt-tailvue": "^1.0.46",
+    "tiptap-vuetify": "^2.24.0",
+    "vue-click-outside": "^1.1.0"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^2.0.0",
