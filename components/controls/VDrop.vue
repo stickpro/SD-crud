@@ -4,14 +4,15 @@
       <label class="block text-sm leading-5 font-medium text-gray-700">
         Cover photo
       </label>
+      <button @click="load">Load</button>
       <div
         @dragover="dragover" @dragleave="dragleave" @drop="drop"
         :class="visualClass ? 'bg-indigo-200' : ''"
         class="mt-2 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-        <input type="file" multiple name="fields[assetsFieldHandle][]" id="assetsFieldHandle"
+        <input type="file" multiple
                multiple="multiple"
                class="w-px h-px opacity-0 overflow-hidden absolute"
-               @change="onChange, previewMultiImage"
+               @change="onChange"
                ref="file"
                accept=".pdf,.jpg,.jpeg,.png"/>
         <div class="text-center">
@@ -23,6 +24,7 @@
           </svg>
           <p class="mt-1 text-sm text-gray-600">
             <button
+              @click="$refs.file.click()"
               class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition duration-150 ease-in-out">
               Upload a file
             </button>
@@ -32,6 +34,7 @@
             PNG, JPG, GIF up to 10MB
           </p>
           <div class="flex">
+
             <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/5" v-for="(file, key) in fileList">
               <div class="hover:opacity-50 relative">
                 <img class="block h-auto w-full rounded-lg " :ref="'image'+parseInt( key )"/>
@@ -42,6 +45,8 @@
                 </button>
               </div>
               {{ file.name }}
+              <input type="text" placeholder="title" v-model="file.title" class="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" />
+              <input type="text" placeholder="alt" v-model="file.alt" class="appearance-none rounded-md relative block w-full px-3 py-2 mt-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5" />
             </div>
           </div>
         </div>
@@ -51,6 +56,8 @@
 </template>
 
 <script>
+import {mapActions} from "vuex";
+
 export default {
   name: "VDrop",
   data() {
@@ -62,6 +69,9 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      storeImage: 'image/storeImage',
+    }),
     onChange() {
       this.fileList = [...this.$refs.file.files];
       this.getImagePreviews()
@@ -92,6 +102,12 @@ export default {
           reader.readAsDataURL(this.fileList[i]);
         }
       }
+    },
+    load() {
+      this.fileList.forEach((file, index) => {
+        console.log(this.fileList[index])
+        this.storeImage(this.fileList[index])
+      })
     }
   }
 }

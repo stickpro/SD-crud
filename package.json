@@ -1,8 +1,8 @@
 {
-  "name": "Plutio",
+  "name": "SD-crud",
   "version": "1.0.0",
-  "description": "My remarkable Nuxt.js project",
-  "author": "Jakub Hrnčíř",
+  "description": "Crud app for portfolio app",
+  "author": "Vladislav Bulgakov",
   "private": true,
   "scripts": {
     "dev": "nuxt",
