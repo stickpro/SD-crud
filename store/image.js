@@ -14,7 +14,7 @@ export const getters = {
   }
 }
 export const mutations = {
-  SET_LIST_IMAGES: set('itemImages'),
+  SET_LIST_IMAGES: set('listImages'),
   SET_ITEM_IMAGE: set('itemImage'),
   ADD_LIST_IMAGE (state, data) {
     state.listImages.push(data)
@@ -33,6 +33,7 @@ export const actions = {
     formData.append('title', file.title)
     formData.append('alt', file.alt)
     formData.append('image', file)
+
     const { data } = await this.$axios.$post('/api/images', formData)
 
     commit('ADD_LIST_IMAGE')
