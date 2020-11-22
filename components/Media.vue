@@ -1,14 +1,15 @@
 <template>
   <div>
     <button @click="show = !show"
-            class="ml-4 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">
+            class=" px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-gray-600 focus:outline-none focus:text-white focus:bg-gray-700">
       Media Library
     </button>
     <div class="absolute top-0 left-0 z-10 flex items-center justify-center w-full h-full "
          style="background-color: rgba(0,0,0,.5);" v-if="show">
 
       <!-- A basic modal dialog with title, body and one button to close -->
-      <div class="h-auto p-4 mx-2 text-left w-3/4 bg-white rounded shadow-xl md:p-6 lg:p-8 md:mx-10">
+      <div class="h-auto p-4 mx-2 relative text-left w-3/4 bg-white rounded shadow-xl md:p-6 lg:p-8 md:mx-10">
+        <button @click="show = !show" class="absolute top-0 right-0 p-3 bg-transparent"><svg-icon width="25px" height="25px" name="close"/></button>
         <div class="flex mb-4">
           <div class="w-3/4">
             <div class="mt-3 text-center mr-8 sm:text-left">
@@ -18,7 +19,7 @@
               <VDrop/>
               <div class="flex flex-wrap -mx-3 overflow-hidden sm:-mx-1 md:-mx-2">
                 <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/5" v-for="(image, i) in images" :key="i">
-                  <article class="overflow-hidden rounded-lg shadow-lg">
+                  <article class="overflow-hidden rounded-lg shadow-lg relative">
                     <img alt="Placeholder" class="block h-auto w-full rounded-lg"
                          :src="image.slug"
                          @click="SET_ITEM_IMAGE(image)">
@@ -30,7 +31,7 @@
           <div class="w-1/4" v-if="image.slug">
             <article class="m-auto overflow-hidden rounded-lg shadow-lg">
               <a href="#">
-                <img alt="Placeholder" class="block h-auto w-full rounded-lg"
+                <img alt="Placeholder" class="block  object-cover h-48 w-full  rounded-lg"
                      :src="image.slug">
               </a>
             </article>
@@ -55,6 +56,7 @@
                 Update
               </button>
               <button
+                @click="attach"
                 class="inline-flex items-center w-100 justify-center mt-2 px-5 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
                 <svg-icon name="attach" class="mr-4" width="20px" height="20px"/>
                 Attach
@@ -73,6 +75,16 @@ import {mapActions, mapGetters, mapMutations} from "vuex";
 
 export default {
   name: "Media",
+  props: {
+    target: {},
+    multiple: {
+      type: Boolean,
+      default: false
+    },
+    gallery: {
+      type: Array
+    }
+  },
   components: {
     VDrop
   },
@@ -91,7 +103,15 @@ export default {
     ...mapActions({
       getImages: 'image/getImages',
     }),
-    ...mapMutations('image', ['SET_ITEM_IMAGE'])
+    ...mapMutations('image', ['SET_ITEM_IMAGE', 'ADD_SELECT_IMAGES']),
+    attach() {
+      if (this.multiple == false) {
+        this.$emit('update:target', this.image)
+        this.show = !this.show
+      } else {
+        this.$emit('update:gallery', this.gallery.concat(this.image))
+      }
+    }
   },
   created() {
     this.getImages()

@@ -21,6 +21,10 @@ export const mutations = {
   },
   DELETE_ITEM_FILTERS (state, id) {
     state.itemImages = state.itemImages.filter(item => item.id != id)
+  },
+  ADD_SELECT_IMAGES(state, id) {
+    let objIndex = state.itemImages.findIndex((obj => obj.id == id));
+    state.itemImages[objIndex].select = !state.itemImages[objIndex].select
   }
 }
 export const actions = {
