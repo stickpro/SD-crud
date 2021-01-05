@@ -10,42 +10,15 @@
           Create New Portfolio
         </nuxt-link>
       </div>
-      <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/5">
-        <Card/>
+      <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/5" v-for="portfolio in portfolios" :key="portfolio.id">
+        <Card :portfolio="portfolio"/>
       </div>
-      <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/5">
-        <Card/>
-      </div>
-
-      <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/5">
-        <Card/>
-      </div>
-
-      <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/5">
-        <Card/>
-      </div>
-
-      <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/5">
-        <Card/>
-      </div>
-
-      <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/5">
-        <Card/>
-      </div>
-
-      <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/5">
-        <Card/>
-      </div>
-
-      <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/5">
-        <Card/>
-      </div>
-
     </div>
   </div>
 </template>
 <script>
 import Card from '@/components/portfolio/Card'
+import {mapActions, mapGetters} from "vuex";
 
 export default {
   name: 'Portfolio-List',
@@ -55,5 +28,19 @@ export default {
   head: () => ({
     title: 'Portfolio'
   }),
+  computed: {
+    ...mapGetters({
+      portfolios: 'portfolio/getPortfolios',
+    }),
+  },
+  methods: {
+    ...mapActions({
+      loadPortfolios: 'portfolio/loadPortfolios',
+    }),
+  },
+  mounted() {
+    this.loadPortfolios()
+    this.$store.commit('app/SET_HEADER_TITLE', this.$t('portfolios.title'))
+  }
 }
 </script>

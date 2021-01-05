@@ -60,10 +60,13 @@ export default {
 		'@nuxtjs/axios',
 		'@nuxtjs/auth-next',
     '@nuxtjs/svg-sprite',
-    ['@nuxtjs/pwa', {icon: false }],
-		'@nuxtjs/dotenv',
+    '@nuxtjs/cloudinary',
+    '@nuxtjs/dotenv',
     'nuxt-i18n',
-    ['nuxt-tailvue', {toast: true}],
+    '@nuxtjs/date-fns',
+    ['@nuxtjs/pwa', {icon: false }],
+    ['nuxt-tailvue', {toast: true, modal: true}],
+
   ],
 	/*
 	** Axios module configuration
@@ -123,6 +126,11 @@ export default {
 		middleware: ['auth', 'language']
 	},
 
+  cloudinary: {
+    cloudName: process.env.CLOUDNAME,
+    useComponent: true
+  },
+
 	/*
 	** Build configuration
 	*/
@@ -131,5 +139,6 @@ export default {
 		** You can extend webpack config here
 		*/
     extend (config, ctx) {},
-	}
+	},
+
 }

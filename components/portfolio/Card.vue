@@ -1,27 +1,31 @@
 <template>
   <article class="overflow-hidden rounded-lg shadow-lg">
-    <a href="#">
-      <img alt="Placeholder" class="block h-auto w-full rounded-lg" src="https://picsum.photos/600/400/?random">
-    </a>
+    <nuxt-link :to="localePath({name: 'portfolio-id', params: { id: portfolio.id }})">
+      <cld-image
+        :public-id="portfolio.mockup.slug"
+        width="600"
+        height="600"
+        crop="fill"
+        gravity="auto:subject"
+        fetchFormat="auto"
+        quality="auto"
+        alt="An image example with Cloudinary"
+        class="block h-auto w-full rounded-lg"
+      />
+    </nuxt-link>
 
     <header class="flex items-center justify-between leading-tight p-2 md:p-4">
       <h1 class="text-lg">
         <a class="no-underline hover:underline text-black" href="#">
-          Article Title
+          {{ portfolio.title }}
         </a>
       </h1>
       <p class="text-grey-darker text-sm">
-        14/4/19
+        {{ $dateFns.format(portfolio.updated_at, 'yyyy-MM-dd') }}
       </p>
     </header>
 
     <footer class="flex items-center justify-between leading-none p-2 md:p-4">
-      <a class="flex items-center no-underline hover:underline text-black" href="#">
-        <img alt="Placeholder" class="block rounded-full" src="https://picsum.photos/32/32/?random">
-        <p class="ml-2 text-sm">
-          Author Name
-        </p>
-      </a>
       <a class="no-underline text-grey-darker hover:text-red-dark" href="#">
         <span class="hidden">Like</span>
         <i class="fa fa-heart"></i>
@@ -29,3 +33,9 @@
     </footer>
   </article>
 </template>
+<script>
+export default {
+  name: 'Card',
+  props: ['portfolio']
+}
+</script>

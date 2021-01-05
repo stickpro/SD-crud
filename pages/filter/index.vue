@@ -105,12 +105,20 @@ export default {
       deleteFilter: 'filter/deleteFilter'
     }),
     remove(item) {
-      this.$toast.show({
-        title: this.$t('app.delete') + '?',
-        message: `${this.$t('app.deleteDes')} ${item.name}`,
-        primary: {label: this.$t('app.delete'), action: () => this.deleteFilter(item.id)},
-        secondary: {label: this.$t('app.cancel'), action: () => null},
-        timeout: false,
+      this.$modal.show({
+        type: 'danger',
+        title: `${this.$t('app.delete')}?`,
+        body: `${this.$t('app.deleteDes')} ${item.name}`,
+        primary: {
+          label: this.$t('app.delete'),
+          theme: 'red',
+          action: () => { this.deleteFilter(item.id), this.$toast.success(this.$t('app.successTitle')) } ,
+        },
+        secondary: {
+          label: this.$t('app.cancel'),
+          theme: 'white',
+          action: () => null,
+        },
       })
     }
   },

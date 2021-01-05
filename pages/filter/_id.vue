@@ -7,7 +7,7 @@
 
     </div>
     <button
-      class="flex justify-center py-2 px-4 mt-5 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
+      class="flex justify-center py-2 px-4 mt-5 ml-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
       @click="sendUpdate">
       <svg-icon name="save" class="h-5 w-5 mr-5" fill="#fff"/>
       {{ $t('app.update') }}

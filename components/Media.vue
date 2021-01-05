@@ -113,8 +113,12 @@ export default {
       }
     }
   },
-  created() {
-    this.getImages()
+  watch: {
+    show() {
+      if(this.show) {
+        this.getImages()
+      }
+    }
   },
 
 }

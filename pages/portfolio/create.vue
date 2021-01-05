@@ -89,7 +89,7 @@
         </div>
       </div>
     </div>
-    <div class="intro-y col-span-12 mx-2 lg:col-span-6">
+    <div class="intro-y col-span-12 mx-2 lg:col-span-8">
       <div class="mt-6">
         <label class="block text-sm leading-5 font-medium text-gray-700">
           Gallery
@@ -104,14 +104,13 @@
             </svg>
           </div>
           <div v-else class="flex">
-            <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/5" v-for="image in gallery" :key="image.id">
+            <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/6" v-for="image in gallery" :key="image.id">
               <div class="hover:opacity-50 relative">
-                <img alt="Placeholder" class="block h-auto w-full rounded-lg"
+                <img alt="Placeholder" class="block  object-cover h-48 w-full  rounded-lg"
                      :src="image.slug">
               </div>
             </div>
           </div>
-          {{mainImage}}
           <Media :gallery.sync="gallery" :multiple=true />
         </div>
       </div>
@@ -120,7 +119,7 @@
       <div class="fixed right-0 mx-10 my-10 bottom-0">
         <button
           class="flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
-          @click="sendTest">Create
+          @click="sendCreateRequest">Create
         </button>
       </div>
     </div>
@@ -184,24 +183,41 @@ export default {
     ...mapMutations('app', ['SET_HEADER_TITLE']),
     ...mapActions({
       getFilters: 'filter/getFilters',
+      storePortfolio: 'portfolio/storePortfolio'
     }),
     onValueSelect(value) {
       this.filter = value;
     },
-    async sendTest() {
-      const data = await this.$axios.$post('/api/portfolios', {
-        title: this.title,
-        slug: this.slug,
-        seo_title: this.seo_title,
-        seo_description: this.seo_description,
-        seo_keywords: this.seo_keywords,
-        description: this.description,
-        filter_id: this.filter.id,
-        external_link: this.external_link,
-        image_id: this.mainImage.id,
-        mockup_id: this.mockup.id,
-        gallery: this.gallery.map(el => el.id)
-      })
+    async sendCreateRequest() {
+        try {
+          let portfolio = {
+            title: this.title,
+            slug: this.slug,
+            seo_title: this.seo_title,
+            seo_description: this.seo_description,
+            seo_keywords: this.seo_keywords,
+            description: this.description,
+            filter_id: this.filter.id,
+            external_link: this.external_link,
+            image_id: this.mainImage.id,
+            mockup_id: this.mockup.id,
+            gallery: this.gallery.map(el => el.id)
+          }
+          await this.storePortfolio(portfolio)
+          await this.$toast.show({
+            type: 'success',
+            title: this.$t('app.successTitle'),
+            message: this.$t('app.successDes'),
+          })
+          this.$router.push(this.localePath({ name: "portfolio"}));
+        } catch {
+          await this.$toast.show({
+            type: 'danger',
+            title: this.$t('app.errorTitle'),
+            message: this.$t('app.errorDes'),
+          })
+        }
+
     }
   },
   mounted() {
