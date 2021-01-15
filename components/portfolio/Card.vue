@@ -5,7 +5,7 @@
         :public-id="portfolio.mockup.slug"
         width="600"
         height="600"
-        crop="fill"
+        crop="fill_pad"
         gravity="auto:subject"
         fetchFormat="auto"
         quality="auto"

@@ -40,6 +40,6 @@ export const actions = {
 
     const { data } = await this.$axios.$post('/api/images', formData)
 
-    commit('ADD_LIST_IMAGE')
+    commit('ADD_LIST_IMAGE', data)
   }
 }

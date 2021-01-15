@@ -83,7 +83,8 @@ export default {
     },
     gallery: {
       type: Array
-    }
+    },
+    portfolioId: {}
   },
   components: {
     VDrop
@@ -102,14 +103,24 @@ export default {
   methods: {
     ...mapActions({
       getImages: 'image/getImages',
+      attachGallery: 'portfolio/attachGallery'
     }),
     ...mapMutations('image', ['SET_ITEM_IMAGE', 'ADD_SELECT_IMAGES']),
-    attach() {
+    async attach() {
       if (this.multiple == false) {
         this.$emit('update:target', this.image)
         this.show = !this.show
       } else {
-        this.$emit('update:gallery', this.gallery.concat(this.image))
+        try {
+          await this.$emit('update:gallery', this.gallery.concat(this.image))
+          await this.attachGallery(this.image.id)
+        } catch {
+          await this.$toast.show({
+            type: 'danger',
+            title: this.$t('app.errorTitle'),
+            message: this.$t('app.errorDes'),
+          })
+        }
       }
     }
   },

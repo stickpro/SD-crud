@@ -30,5 +30,16 @@ export const actions = {
 
   async storePortfolio({ commit }, portfolio) {
     const {data} = await this.$axios.$post('api/portfolios', portfolio)
+  },
+
+  async updatePortfolio({ state }, id) {
+    const { data } = await this.$axios.$put(`api/portfolios/${id}`, state.portfolio)
+  },
+
+  async attachGallery({ state }, image_id) {
+    const { data } = await this.$axios.$post(`api/images/${image_id}/portfolios/${state.portfolio.id}`)
+  },
+  async detachGallery({ state }, image_id) {
+    const { data } = await this.$axios.$delete(`api/images/${image_id}/portfolios/${state.portfolio.id}`)
   }
 }
